@@ -25,8 +25,7 @@ const int PLAYGROUND_LECTURE[PLAYGROUND_SIZE] = {
 */
 unsigned const int PLAYER_ONE = -1;
 unsigned const int PLAYER_TWO = 1;
-unsigned const int NO_MOVE = 0;
-unsigned const int NO_WINNER = 0;
+unsigned const int NO_PLAYER = 0;
 
 int current_player = PLAYER_ONE;
 
@@ -107,7 +106,7 @@ int check_tris() {
    * It is called once between one move and the other. It basically will sums all the combinations together
    * from `COMBINATIONS` var and checks if any sum is -3 or 3.
   */
-  unsigned int winner = NO_WINNER;
+  unsigned int winner = NO_PLAYER;
 
   for (int i = 0; i < 8; i++) {
     /*
@@ -119,9 +118,9 @@ int check_tris() {
      * ok I am using this fucking line that works but it is a crap and I will
      * change it
     */
-    unsigned int current[3] = {*COMBINATIONS[0], *COMBINATIONS[1], *COMBINATIONS[2]};
+    unsigned const int *current[3] = {*COMBINATIONS[0], *COMBINATIONS[1], *COMBINATIONS[2]};
     // We sum up all the combinations in 'current' var
-    unsigned int sum = current[0] + current[1] + current[2];
+    unsigned int sum = *current[0] + *current[1] + *current[2];
 
     switch (sum) {
       case -3:
@@ -144,12 +143,8 @@ bool is_valid_move(size_t pos) {
    * If the position is empty, we return true
    * otherwise, false
   */
-  size_t current = playground[pos];
-  if (current == NO_MOVE) {
-    return true;
-  }
-  
-  return false;
+  unsigned int current = playground[pos];
+  return (current == NO_PLAYER);
 }
 
 
@@ -233,7 +228,7 @@ void loop() {
 
   int tris_result = check_tris();
   switch (tris_result) {
-    case NO_WINNER:
+    case NO_PLAYER:
       /*
        * Nobody won, do nothing
       */
