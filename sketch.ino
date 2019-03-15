@@ -188,9 +188,8 @@ void setup() {
 
 
 void loop() {
-  /*
-  set_led_all(PLAYER_ONE, HIGH);
-  set_led_all(PLAYER_TWO, HIGH);
+  //set_led_all(PLAYER_ONE, HIGH);
+  //set_led_all(PLAYER_TWO, HIGH);
   //win_animation(PLAYER_ONE);
   //in_animation(PLAYER_TWO);
   
@@ -210,36 +209,5 @@ void loop() {
   delay(1000);
   for (size_t i = 0; i < 9; i++) {
     set_led(i, PLAYER_TWO, LOW);
-  }*/
-  
-  for (size_t analog = 0; analog < 9; analog++) {
-    size_t value = analogRead(PLAYGROUND_LECTURE[analog]);
-    if (value >= threshold) {
-      if (is_valid_move(analog)) {
-        /*
-         * We detected that someone wants to add a move
-         * We detected that the move is valid, it means that the desired
-         * box is empty, so we can proceed to save the new move and turn the led on
-        */
-        add_move(analog, current_player);
-      }
-    }
-  }
-
-  int tris_result = check_tris();
-  switch (tris_result) {
-    case NO_PLAYER:
-      /*
-       * Nobody won, do nothing
-      */
-      break;
-    case PLAYER_ONE:
-    case PLAYER_TWO:
-      /*
-       * Someone has won, launch animation and exit the program
-      */
-      win_animation(tris_result);
-      //EXIT
-      break;
   }
 }
