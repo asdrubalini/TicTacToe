@@ -10,7 +10,7 @@ const int PLAYGROUND_LEDS_P1[PLAYGROUND_SIZE] = {
 //PINs for the second player (BLUE)
 const int PLAYGROUND_LEDS_P2[PLAYGROUND_SIZE] = {
   40, 39, 38,
-  37, 36, 43,
+  37, 36, 35,
   34, 33, 32
 };
 
